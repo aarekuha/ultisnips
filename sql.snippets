@@ -1,0 +1,35 @@
+global !p
+def complete(t, opts):
+	if t:
+		opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+	if len(opts) == 1:
+		return opts[0]
+	return "(" + '|'.join(opts) + ')'
+endglobal
+
+snippet sela
+select ${1:*}
+from ${2:table_name
+${3:where ${4:where_clause}}};
+$0
+endsnippet
+
+snippet sel
+select ${1:*}
+from ${2:table_name
+${3:where ${4:where_clause}}};
+$0
+endsnippet
+
+snippet cnt
+select count(*) from ${1:table_name};
+$0
+endsnippet
+
+snippet nc "Netcracker"
+netcracker${1:_rdb}.$0
+endsnippet
+
+snippet st "Status" a
+status $1`!p snip.rv=complete(t[1], ['new','incomplete','invalid'])`
+endsnippet
